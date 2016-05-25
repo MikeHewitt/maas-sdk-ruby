@@ -1,0 +1,5 @@
+source "http://rubygems.org"
+
+gem 'sinatra'
+gem 'miracl_api', :git => "https://github.com/miracl/maas-sdk-ruby.git", :branch => "development"
+gem 'sinatra-flash', '~> 0.3.0'
