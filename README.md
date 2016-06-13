@@ -68,14 +68,19 @@ Use `@client.clear_user_info(session, true)` to clear user authorization status.
 
 ### Authorization flow
 
-Authorization flow depends on `mpin.js` browser library. `mpin.js` depends on`jquery`.To use it, load it in `<head>` element of page responsible for login:
-
+Authorization flow depends on `mpad.js` browser library. To use it, drop following line
 ```
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
-    <script src="http://mpinaas-demo.miracl.net:8002/mpin/mpin.js"></script>
+<script src="https://demo.dev.miracl.net/mpin/mpad.js" data-authurl="<%=auth_url%>" data-element="btmpin"></script>
 ```
+right before closing `</body>` tag. And drop
+```
+<div id="btmpin"></div>
+```
+in the desired location of "Login with M-Pin" button.
 
-If user is not authorized, use `@client.get_authorization_request_url(params, session)` to get authorization request URL and set client internal state. Returned URL should be used with `mpin.js` login function `mpin.login({authURL: '<%=@auth_url%>'})`. After user interaction with Miracl system  user will be sent to `redirect_uri` defined at creation of `MiraclClient` object.
+If user is not authorized, use `miracl.getAuthorizationRequestUrl(session)` to get authorization request URL and set client internal state. Returned URL should be passed to `data-authurl` attribute like `data-authurl="<%=auth_url%>`. After user interaction with Miracl system user will be sent to `redirect_uri` defined at initialization of `MiraclClient` object.
+
+If user is not authorized, use `@client.get_authorization_request_url(params, session)` to get authorization request URL and set client internal state. Returned URL should be passed to `data-authurl` attribute like `data-authurl="<%=@auth_url%>"`. After user interaction with Miracl system  user will be sent to `redirect_uri` defined at creation of `MiraclClient` object.
 
 To complete authorization pass params hash received on `redirect_uri` to `@client.validate_authorization(params, session)`. This method will return `nil` if user denied authorization and token if authorization succeeded. Token is preserved in `session` so there is no need to save token elsewhere.
 
@@ -90,7 +95,7 @@ Sample on Sinatra can be found in the `sample` directory. Replace `CLIENT_ID`, `
 To start server,
 `cd samples` && `ruby sinatra_sample.rb`.
 
-Open `http://127.0.0.1:3000/` in your browser to explore the sample.
+Open `http://127.0.0.1:5000/` in your browser to explore the sample.
 
 In case you haven't installed Sinatra before, run
 `gem install sinatra`
