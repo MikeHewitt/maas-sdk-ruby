@@ -54,10 +54,11 @@ To start using Miracl API, `MiraclClient` should be initialized. It can be done 
 @client = MiraclApi::MiraclClient.new({
     client_id: "CLIENT_ID",
     client_secret: "CLIENT_SECRET",
-    redirect_uri: "REDIRECT_URI"
+    redirect_uri: "REDIRECT_URI",
+    issuer: "ISSUER"
     })
 ```
-`CLIENT_ID` and `CLIENT_SECRET` can be obtained from Miracl(unique per application). `REDIRECT_URI` is URI of your application end-point that will be responsible obtaining token. It should be the same as registered in Miracl system for this client ID.
+`CLIENT_ID` and `CLIENT_SECRET` can be obtained from Miracl(unique per application). Normally it is not necessary to specify Miracl configuration endpoint to MiraclClient but it can be done by passing `issuer: "ISSUER"` along with `client_id`, `client_secret` and `redirect_uri` to `MiraclClient`. `REDIRECT_URI` is URI of your application end-point that will be responsible obtaining token. It should be the same as registered in Miracl system for this client ID.
 
 To check if user session has token use `@client.is_authorized(session)`. You can request additional user data with `@client.get_email(session)` and `@client.get_user_id(session)`. Both methods cache results into `session`. If `nil`  is returned, token is expired and client needs to be authorized once more to access required data.
 
@@ -84,7 +85,7 @@ Each call to `MiraclClient` can raise `MiraclError`. It contains `message` and s
 
 ## Samples
 
-Sample on Sinatra can be found in the `sample` directory. Replace `CLIENT_ID`, `CLIENT_SECRET` and `REDIRECT_URI` with valid data from https://m-pin.my.id/protected . Do steps written in `Installation` before starting the Sinatra server.
+Sample on Sinatra can be found in the `sample` directory. Replace `CLIENT_ID`, `CLIENT_SECRET` located in `sample.json` with valid data. Do steps written in `Installation` before starting the Sinatra server.
 
 To start server,
 `cd samples` && `ruby sinatra_sample.rb`.

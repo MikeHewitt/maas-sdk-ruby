@@ -18,9 +18,6 @@ before do
 end
 
 get('/') do
-  file = open("sample.json")
-  json = file.read
-  parsed = JSON.parse(json)
   @retry = flash[:danger] ? true : false
   @is_authorized = @miracl.is_authorized(session)
   if @is_authorized
