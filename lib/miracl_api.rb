@@ -8,14 +8,15 @@ module MiraclApi
         super(message)
       end
     end
-    ISSUER = "http://mpinaas-demo.miracl.net:8001"
+    ISSUER = "https://api.dev.miracl.net"
 
     def initialize(options = {})
-        @client_id = options[:client_id]
-        @client_secret = options[:client_secret]
-        @redirect_uri = options[:redirect_uri]
-        @provider_info = discover!
-        client
+      @client_id = options[:client_id]
+      @client_secret = options[:client_secret]
+      @redirect_uri = options[:redirect_uri]
+      @issuer = options[:issuer] || ISSUER
+      @provider_info = discover!
+      client
     end
 
     def get_authorization_request_url(session)
@@ -132,9 +133,9 @@ module MiraclApi
       end
 
       def discover!
-        SWD.url_builder=URI::HTTP if ISSUER.include? 'http:' #forces SWD to use HTTP if
+        SWD.url_builder=URI::HTTP if @issuer.include? 'http:' #forces SWD to use HTTP if
                                                             #ISSUER doesn't provide SSL discovery endpoint
-        OpenIDConnect::Discovery::Provider::Config.discover! ISSUER
+        OpenIDConnect::Discovery::Provider::Config.discover! @issuer
       rescue OpenIDConnect::Discovery::DiscoveryFailed => e
         raise MiraclError.new("Invalid ISSUER", e)
       end

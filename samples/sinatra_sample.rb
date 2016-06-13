@@ -1,21 +1,26 @@
 require "bundler/setup"
 require 'sinatra'
 require 'sinatra/flash'
-require 'miracl_api'
+require '../lib/miracl_api'
+require 'json'
 
 configure do
-  set :port, 3000
+  set :port, 5000
   enable :sessions
 end
 
 before do
-  @miracl = MiraclApi::MiraclClient.new({
-    client_id: "CLIENT_ID",
-    client_secret: "CLIENT_SECRET",
-    redirect_uri: "REDIRECT_URI"})
+  file = open("sample.json")
+  json = file.read
+  parsed = JSON.parse(json)
+  credentials = parsed.inject({}){|memo,(k,v)| memo[k.to_sym] = v; memo}
+  @miracl = MiraclApi::MiraclClient.new(credentials)
 end
 
 get('/') do
+  file = open("sample.json")
+  json = file.read
+  parsed = JSON.parse(json)
   @retry = flash[:danger] ? true : false
   @is_authorized = @miracl.is_authorized(session)
   if @is_authorized
