@@ -2,27 +2,47 @@
 
 ## Installation
 
-Add the following line to Gemfile:
+There are two ways to install Miracl API:
 
-`gem 'miracl_api', :git => 'git://github.com/miracl/maas-sdk-ruby.git'`
+1. By adding miracl_api to Gemfile
 
-And run `bundle install`
+  1.1. Add the following line to Gemfile:
 
-Or
+    `gem 'miracl_api', :git => "https://github.com/miracl/maas-sdk-ruby.git"`
 
-1.Download the source:
+  Or if you are cloning from `development` branch:
+
+    `gem 'miracl_api', :git => "https://github.com/miracl/maas-sdk-ruby.git", :branch => "development"`
+
+  1.2. run `bundle install`
+
+  1.3. Include Miracl API by placing `require 'miracl_api'` at the top of the file where you are going to use SDK
+
+2. By cloning the repository and building the gem
+
+  2.1. Download the source:
 
    `git clone https://github.com/miracl/maas-sdk-ruby.git`
 
-2.Build the gem:
+   Or if you are cloning from `development` branch:
 
-   `cd miracl_api` && `gem build miracl_api.gemspec`
+   `git clone -b development https://github.com/miracl/maas-sdk-ruby.git`
 
-3.Install it from project root:
+  2.2. Build the gem:
 
-   `gem install miracl_api/miracl_api-0.1.0.gem`
+   `cd maas-sdk-ruby` && `gem build miracl_api.gemspec`
 
-And run `bundle install`
+  2.3. Install it from the root of your project:
+
+   `gem install MAAS-SDK-RUBY_PATH/miracl_api-0.1.0.gem`
+
+   Path to `miracl_api-0.1.0.gem` may vary depending on where you built the gem.
+
+  2.4. After successful installation add the following line to your Gemfile:
+
+    `gem 'miracl_api'`
+
+  2.5. Include Miracl API by placing `require 'miracl_api'` at the top of the file where you are going to use SDK
 
 ## Tests
 
@@ -90,13 +110,10 @@ Each call to `MiraclClient` can raise `MiraclError`. It contains `message` and s
 
 ## Samples
 
-Sample on Sinatra can be found in the `sample` directory. Replace `CLIENT_ID`, `CLIENT_SECRET` located in `sample.json` with valid data. Do steps written in `Installation` before starting the Sinatra server.
+Sample on Sinatra can be found in the `sample` directory. Replace `CLIENT_ID`, `CLIENT_SECRET` located in `sample.json` with valid data.
 
-To start server,
-`cd samples` && `ruby sinatra_sample.rb`.
+Uncomment one of the lines in Gemfile depending on the type of installation. Do steps written in `Installation` and run `bundle install` to install Sinatra and other dependencies.
+
+When you are done, run `ruby sinatra_sample.rb` to start the server.
 
 Open `http://127.0.0.1:5000/` in your browser to explore the sample.
-
-In case you haven't installed Sinatra before, run
-`gem install sinatra`
- before running sample app.

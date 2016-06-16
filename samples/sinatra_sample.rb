@@ -1,7 +1,7 @@
 require "bundler/setup"
 require 'sinatra'
 require 'sinatra/flash'
-require '../lib/miracl_api'
+require 'miracl_api'
 require 'json'
 
 configure do

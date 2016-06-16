@@ -1,5 +1,11 @@
 source "http://rubygems.org"
 
 gem 'sinatra'
-gem 'miracl_api', :git => "https://github.com/miracl/maas-sdk-ruby.git", :branch => "development"
+
+#uncomment line below if you are going to install miracl_api gem via `bundle install`
+# gem 'miracl_api', :git => "https://github.com/miracl/maas-sdk-ruby.git", :branch => "development"
+
+#uncomment line below if you have installed miracl_api gem via `gem build and gem install`
+# gem 'miracl_api'
+
 gem 'sinatra-flash', '~> 0.3.0'
