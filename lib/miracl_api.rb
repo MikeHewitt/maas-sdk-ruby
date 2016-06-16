@@ -10,7 +10,6 @@ module MiraclApi
         super(message)
       end
     end
-    ISSUER = "https://api.dev.miracl.net"
 
     def initialize(options = {})
       @issuer = Configuration.issuer
