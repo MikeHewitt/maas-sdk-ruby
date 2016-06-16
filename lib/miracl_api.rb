@@ -1,5 +1,7 @@
 require "miracl_api/version"
 require "openid_connect"
+require "config"
+
 module MiraclApi
   class MiraclClient
     class MiraclError < StandardError
@@ -11,10 +13,11 @@ module MiraclApi
     ISSUER = "https://api.dev.miracl.net"
 
     def initialize(options = {})
+      @issuer = Configuration.issuer
       @client_id = options[:client_id]
       @client_secret = options[:client_secret]
       @redirect_uri = options[:redirect_uri]
-      @issuer = options[:issuer] || ISSUER
+      @issuer = options[:issuer] || @issuer
       @provider_info = discover!
       client
     end
