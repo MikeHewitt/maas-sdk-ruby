@@ -1,5 +1,9 @@
 # Setup
 
+Some dependencies require additional system packages to be installed. For Ubuntu 14.04 dependencies are:
++ rubygems
++ bundler
+
 ## Installation
 
 There are two ways to install Miracl API:
@@ -112,7 +116,7 @@ Each call to `MiraclClient` can raise `MiraclError`. It contains `message` and s
 
 Sample on Sinatra can be found in the `sample` directory. Replace `CLIENT_ID`, `CLIENT_SECRET` located in `sample.json` with valid data.
 
-Uncomment one of the lines in Gemfile depending on the type of installation. Do steps written in `Installation` and run `bundle install` to install Sinatra and other dependencies.
+Uncomment one of the lines written in Gemfile depending on the type of installation. Do steps written in `Installation` and then run `bundle install` to install Sinatra and other dependencies.
 
 When you are done, run `ruby sinatra_sample.rb` to start the server.
 
