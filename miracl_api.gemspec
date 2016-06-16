@@ -11,7 +11,7 @@ Gem::Specification.new do |spec|
 
   spec.summary       = "SDK for using Miracl authentication'"
   spec.homepage      = "https://github.com/miracl/maas-sdk-ruby"
-  spec.license       = "TBD"
+  spec.license       = "Nonstandard"
 
   spec.files         = `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features)/}) }
   spec.bindir        = "exe"
