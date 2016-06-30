@@ -1,5 +1,5 @@
 module Configuration
-  @issuer = "https://api.dev.miracl.net"
+  @issuer = "https://api.stg.miracl.net"
 
   def self.issuer
     return @issuer
