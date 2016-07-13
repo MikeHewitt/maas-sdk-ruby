@@ -1,6 +1,7 @@
 require "miracl_api/version"
 require "openid_connect"
 require "config"
+require "messages"
 
 module MiraclApi
   class MiraclClient
@@ -12,11 +13,10 @@ module MiraclApi
     end
 
     def initialize(options = {})
-      @issuer = Configuration.issuer
       @client_id = options[:client_id]
       @client_secret = options[:client_secret]
       @redirect_uri = options[:redirect_uri]
-      @issuer = options[:issuer] || @issuer
+      @issuer = options[:issuer] || ISSUER
       @provider_info = discover!
       client
     end
@@ -26,7 +26,6 @@ module MiraclApi
       # redirects back, pass url params to validate_authorization to complete
       # authorization with server.
       # :arg session ruby hash that contains session variables
-
       session[:miracl_state] ||= SecureRandom.hex(16)
       session[:miracl_nonce] ||= SecureRandom.hex(16)
       client.redirect_uri = @redirect_uri
@@ -45,7 +44,7 @@ module MiraclApi
       # :arg params hash of parameters returned from authorization URL.
 
       return nil if (params[:code].nil?) || (params[:code].empty?) || (params[:state].nil?) || (params[:state].empty?)
-      raise MiraclError.new("Session state differs from response state") if params[:state] != session[:miracl_state]
+      raise MiraclError.new(STATE_DIFFERS) if params[:state] != session[:miracl_state]
       client.redirect_uri = @redirect_uri
       client.authorization_code = params[:code]
       access_token = client.access_token! client_auth_method
@@ -110,9 +109,9 @@ module MiraclApi
         userinfo
       rescue OpenIDConnect::Unauthorized => e
         session[:miracl_token] = nil
-        raise MiraclError.new("Userinfo request failed", e)
+        raise MiraclError.new(USER_INFO_FAILED, e)
       rescue OpenIDConnect::BadRequest, OpenIDConnect::HttpError, OpenIDConnect::Forbidden => e
-        raise MiraclError.new("Userinfo request failed", e)
+        raise MiraclError.new(USER_INFO_FAILED, e)
       end
 
       def client_auth_method
@@ -139,7 +138,7 @@ module MiraclApi
                                                             #ISSUER doesn't provide SSL discovery endpoint
         OpenIDConnect::Discovery::Provider::Config.discover! @issuer
       rescue OpenIDConnect::Discovery::DiscoveryFailed => e
-        raise MiraclError.new("Invalid ISSUER", e)
+        raise MiraclError.new(INVALID_ISSUER, e)
       end
 
       def as_json(options = {})
