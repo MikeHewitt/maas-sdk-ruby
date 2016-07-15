@@ -50,8 +50,8 @@
     </div>
 
     <% if @retry %>
-    <div class="col-md-12">
-          <a href="#" class="btn btn-primary" onClick="mpin.login({authURL: '<%=@auth_url%>'})">Retry?</a>
+      <div class="col-md-12">
+        <div id="btmpin"></div>
       </div>
     <% else %>
       <div class="row">
@@ -68,11 +68,13 @@
         <% else %>
             <div class="col-md-12">
               <div id="btmpin"></div>
-              <script src="https://demo.stg.miracl.net/mpin/mpad.js" data-authurl="<%=@auth_url%>" data-element="btmpin"></script>
             </div>
         <% end %>
       </div>
     <% end %>
   </div>
+  <% if @auth_url %>
+    <script src="https://demo.stg.miracl.net/mpin/mpad.js" data-authurl="<%=@auth_url%>" data-element="btmpin"></script>
+  <% end %>
 </body>
 </html>
