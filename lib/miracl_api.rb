@@ -14,7 +14,7 @@ module MiraclApi
 
     def initialize(options = {})
       @client_id = options[:client_id]
-      @client_secret = options[:client_secret]
+      @client_secret = options[:secret]
       @redirect_uri = options[:redirect_uri]
       @issuer = options[:issuer] || ISSUER
       @provider_info = discover!
