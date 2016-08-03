@@ -1,1 +1,1 @@
-ISSUER = "https://api.stg.miracl.net"
+ISSUER = "https://api.mpin.io"
