@@ -13,8 +13,8 @@ branches:
     - travis
 
 rvm:
-  - 2.1
-  - 2.2
+  - 2.2.5
+  - 2.3.1
 
 matrix:
   allow_failures:
