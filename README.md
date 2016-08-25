@@ -13,7 +13,7 @@
 Ruby version of the Software Development Kit (SDK) for MPin-As-A-Service (MAAS).
 
 
-# Setup
+## Setup
 
 Some dependencies require additional system packages to be installed. For Ubuntu 14.04 dependencies are:
 + rubygems
