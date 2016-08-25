@@ -15,7 +15,6 @@ branches:
 rvm:
   - 2.1
   - 2.2
-  - 2.3
 
 matrix:
   allow_failures:
@@ -31,6 +30,7 @@ before_install:
   - if [ -n "$GH_TOKEN" ]; then git config --global github.token ${GH_TOKEN}; fi;
 
 install:
+  - gem install --force rubygems-update
   - gem install --force bundler
   - bundler install
 
