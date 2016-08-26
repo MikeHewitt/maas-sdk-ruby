@@ -9,9 +9,9 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Marcis Nimants"]
   spec.email         = ["marcis.nimants@testdevlab.com"]
 
-  spec.summary       = "SDK for using Miracl authentication'"
+  spec.summary       = "SDK for using Miracl authentication"
   spec.homepage      = "https://github.com/miracl/maas-sdk-ruby"
-  spec.license       = "Nonstandard"
+  spec.license       = "Apache 2.0"
 
   spec.files         = `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features)/}) }
   spec.bindir        = "exe"
@@ -19,8 +19,9 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
 
   spec.add_runtime_dependency     'openid_connect', '~> 0.10.0'
-  spec.add_development_dependency "bundler", "~> 1.12"
-  spec.add_development_dependency "rake", "~> 10.0"
-  spec.add_development_dependency "minitest", "~> 5.0"
+  spec.add_development_dependency 'bundler', '~> 1.12'
+  spec.add_development_dependency 'rake', '~> 10.0'
+  spec.add_development_dependency 'minitest', '~> 5.0'
   spec.add_development_dependency 'mocha', '~> 1.1'
+  spec.add_development_dependency 'coveralls', '~> 0.8.15'
 end
