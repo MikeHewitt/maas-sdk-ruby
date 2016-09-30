@@ -107,11 +107,14 @@ Use `@client.clear_user_info(session, true)` to clear user authorization status.
 
 ### Authorization flow
 
-Authorization flow depends on `mpad.js` browser library. To use it, drop following line
+The authorization flow depends on the `mpad.js` browser library. To use it, add the following line right before the closing `</body>` tag:
 ```
-<script src="https://dd.cdn.mpin.io/mpad/mpad.js" data-authurl="<%=auth_url%>" data-element="btmpin"></script>
+<script src="<<Insert correct mpad url here>>" data-authurl="<%=auth_url%>" data-element="btmpin"></script>
 ```
-right before closing `</body>` tag. And drop
+(Please refer to your distributor-specific documentation to find the correct url for the mpad.js `script src`)
+
+And drop
+
 ```
 <div id="btmpin"></div>
 ```
